@@ -83,6 +83,10 @@ class StreamingService {
 
         const myBucket = storage.bucket(bucketName);
         const file = myBucket.file("output9.xlsx");
+        passThroughStr.pipe(file.createWriteStream()).on('finish', () => {
+            // The file upload is complete
+            console.log(`uploaded to ${bucketName}`);
+        });
 
         const { preHook, errorHook, errorHandler } = StreamingService.getOptions(outStream, options);
         inStream.on('error', (error) => {
@@ -105,10 +109,7 @@ class StreamingService {
 
         }
 
-        passThroughStr.pipe(file.createWriteStream()).on('finish', () => {
-            // The file upload is complete
-            console.log(`uploaded to ${bucketName}`);
-        });
+        
 
     };
 
@@ -130,6 +131,10 @@ class StreamingService {
 
         const myBucket = storage.bucket(bucketName);
         const file = myBucket.file("outputF10.xlsx");
+        passThroughStr.pipe(file.createWriteStream()).on('finish', () => {
+            // The file upload is complete
+            console.log(`uploaded to ${bucketName}`);
+        });
 
         const { preHook, errorHook, errorHandler } = StreamingService.getOptions(outStream, options);
         inStream.on('error', (error) => {
@@ -145,10 +150,7 @@ class StreamingService {
         inStream.on("end", ()=>{
             workbook.commit()
         })
-        passThroughStr.pipe(file.createWriteStream()).on('finish', () => {
-            // The file upload is complete
-            console.log(`uploaded to ${bucketName}`);
-        });
+        
     };
 }
 
